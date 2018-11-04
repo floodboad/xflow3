@@ -1,0 +1,4 @@
+INSERT INTO XFLOW_DEFINITION_INSTANCE 
+(CODE,NAME,VERSION,STATUS,CREATE_DATE,LAST_UPDATE_DATE,REMARK,XML)
+VALUES 
+(:code,:name,:version,:status,:createDate,:lastUpdateDate,:remark,:xml)

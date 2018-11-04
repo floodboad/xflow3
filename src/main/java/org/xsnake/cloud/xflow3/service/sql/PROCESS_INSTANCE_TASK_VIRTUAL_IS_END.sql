@@ -1,0 +1,3 @@
+SELECT count(1) FROM XFLOW_PROCESS_INSTANCE_TASK
+WHERE RECORD_ID = :recordId 
+and TASK_TYPE = 'virtual'

@@ -1,0 +1,1 @@
+delete from XFLOW_PROCESS_INSTANCE_TASK where task_id = :taskId

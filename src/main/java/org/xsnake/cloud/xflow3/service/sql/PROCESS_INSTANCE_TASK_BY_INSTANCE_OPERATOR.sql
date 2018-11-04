@@ -1,0 +1,4 @@
+SELECT * FROM XFLOW_PROCESS_INSTANCE_TASK_V 
+WHERE PROCESS_INSTANCE_ID = :processInstanceId
+and PARTICIPANT_ID = :participantId
+and PARTICIPANT_TYPE = :participantType

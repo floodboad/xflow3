@@ -1,0 +1,4 @@
+SELECT * FROM XFLOW_PROCESS_INSTANCE_TASK_V 
+WHERE PROCESS_INSTANCE_ID = :processInstanceId 
+and RECORD_ID = :recordId
+and TASK_TYPE != 'virtual'
