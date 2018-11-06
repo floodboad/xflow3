@@ -3,7 +3,7 @@ package org.xsnake.cloud.xflow3.api;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
+import org.springframework.util.StringUtils;
 
 public class ProcessInstance implements Serializable {
 	

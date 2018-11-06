@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.lang.StringUtils;
 import org.dom4j.Element;
+import org.springframework.util.StringUtils;
 import org.xsnake.cloud.dao.DaoUtil;
 import org.xsnake.cloud.xflow3.api.exception.XflowDefinitionException;
 import org.xsnake.cloud.xflow3.core.activity.EndActivity;
@@ -224,6 +224,10 @@ public abstract class Activity implements Serializable{
 
 	public List<Transition> getToTransitionList() {
 		return Collections.unmodifiableList(toTransitionList);
+	}
+
+	public Map<String, String> getAttributes() {
+		return Collections.unmodifiableMap(attributes);
 	}
 	
 }

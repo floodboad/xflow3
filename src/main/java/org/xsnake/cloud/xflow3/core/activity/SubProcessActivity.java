@@ -3,8 +3,8 @@ package org.xsnake.cloud.xflow3.core.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.dom4j.Element;
+import org.springframework.util.StringUtils;
 import org.xsnake.cloud.xflow3.api.ProcessInstance;
 import org.xsnake.cloud.xflow3.api.exception.XflowDefinitionException;
 import org.xsnake.cloud.xflow3.core.AutomaticActivity;
@@ -24,7 +24,7 @@ public abstract class SubProcessActivity extends AutomaticActivity {
 			@SuppressWarnings("unchecked")
 			List<Element> definitionCodes = activityElement.element("subProcess").elements("code");
 			for(Element e : definitionCodes){
-				if(StringUtils.isNotEmpty(e.getText())){
+				if(!StringUtils.isEmpty(e.getText())){
 					definitionCodeList.add(e.getText());
 				}
 			}

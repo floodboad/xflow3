@@ -15,7 +15,6 @@ import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cglib.beans.BeanMap;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -42,7 +41,6 @@ import freemarker.template.Configuration;
  * 
  */
 @org.springframework.context.annotation.Configuration
-@RefreshScope
 public class DaoUtil {
 
 	private FreeMarkerConfigurer config = new FreeMarkerConfigurer();

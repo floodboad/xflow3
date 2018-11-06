@@ -22,7 +22,6 @@ import org.xsnake.cloud.common.search.Page;
 /**
  * 
  * @author Jerry.Zhao
- * 具名DAO，不建议直接使用该类，请通过{@linkorg.xsnake.cloud.dao.DaoUtil}调用
  *
  */
 @Configuration

@@ -3,8 +3,8 @@ package org.xsnake.cloud.xflow3.core.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.dom4j.Element;
+import org.springframework.util.StringUtils;
 import org.xsnake.cloud.xflow3.api.exception.XflowBusinessException;
 import org.xsnake.cloud.xflow3.api.exception.XflowDefinitionException;
 import org.xsnake.cloud.xflow3.core.ParticipantActivity;

@@ -1,5 +1,6 @@
 package org.xsnake.cloud.xflow3.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,7 +9,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public interface ITaskService {
 	
-	/**
+	
+	/*
+	 * 领取任务 
+	 */
+	@RequestMapping(value = "/task/receive", method = RequestMethod.POST)
+	boolean receive(@RequestBody TaskForm taskForm);
+	
+	/*
+	 * 获取多个参与者的任务列表 
+	 */
+	@RequestMapping(value = "/task/taskList", method = RequestMethod.POST)
+	List<Task> taskList(@RequestBody ArrayList<Participant> participantList);
+	
+	/*
 	 * 完成任务，如果整个流程结束返回true反之为false。区分虚拟任务与定义任务，如果是虚拟任务不会推动流程运行
 	 * @param completeTaskForm
 	 * @return 流程是否结束标志
@@ -16,35 +30,27 @@ public interface ITaskService {
 	@RequestMapping(value = "/task/complete", method = RequestMethod.POST)
 	boolean complete(@RequestBody CompleteTaskForm completeTaskForm);
 	
-	/**
+	/*
 	 * 获取指定任务
-	 * @param id
-	 * @return
 	 */
 	@RequestMapping(value = "/task/get", method = RequestMethod.GET)
 	Task get(String id);
 	
 	
-	/**
+	/*
 	 * 转办，将任务交给另一个参与者 
-	 * @param transferTaskForm
-	 * @return
 	 */
 	@RequestMapping(value = "/task/transfer", method = RequestMethod.POST)
 	boolean transfer(@RequestBody TransferTaskForm transferTaskForm);
 	
-	/**
+	/*
 	 * 支持类型任务，不会影响流程的流转，当操作人发起支持操作时，原任务进入挂起等待状态，等待所有支持的虚拟任务完成后会唤起父任务
-	 * @param supportTaskForm
-	 * @return
 	 */
 	@RequestMapping(value = "/task/support", method = RequestMethod.POST)
 	boolean support(@RequestBody SupportTaskForm supportTaskForm);
 	
-	/**
+	/*
 	 * 驳回,支持两种驳回方式。1JUMP驳回后跳过中间环节直接回到驳回发起的节点，2FLOW驳回后按照流程定义重新流转
-	 * @param rejectTaskForm
-	 * @return
 	 */
 	@RequestMapping(value = "/task/reject", method = RequestMethod.POST)
 	boolean reject(@RequestBody RejectTaskForm rejectTaskForm);
@@ -205,14 +211,12 @@ public interface ITaskService {
 		}
 	}
 	
-	public static class CompleteTaskForm {
-		
+	public static class TaskForm {
+	
 		String taskId;
 		
 		Participant operator;
 		
-		String comment;
-
 		public String getTaskId() {
 			return taskId;
 		}
@@ -228,6 +232,11 @@ public interface ITaskService {
 		public void setOperator(Participant operator) {
 			this.operator = operator;
 		}
+	}
+	
+	public static class CompleteTaskForm extends TaskForm{
+		
+		String comment;
 
 		public String getComment() {
 			return comment;

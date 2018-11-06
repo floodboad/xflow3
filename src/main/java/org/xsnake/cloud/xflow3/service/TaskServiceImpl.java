@@ -1,7 +1,9 @@
 package org.xsnake.cloud.xflow3.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.dom4j.DocumentException;
@@ -339,13 +341,52 @@ public class TaskServiceImpl implements ITaskService{
 			return null;
 		}
 		
+		//活动流程定义信息
+		String xml = daoUtil.$queryObject("DEFINITION_INSTANCE_GET_XML.sql", task,String.class);
+		ProcessDefinition processDefinition = null;
+		try {
+			processDefinition = ProcessDefinition.parse(applicationContext, xml);
+		} catch (DocumentException e) {
+			//忽略错误
+		}
+		
+		Activity taskActivity = processDefinition.getActivity(task.getActivityId());
+		task.setActivityAttributes(taskActivity.getAttributes());
+		
 		//查找当前任务可以驳回的节点
 		if(DefinitionConstant.TYPE_ACTIVITY_TASK_NORMAL.equals(task.getTaskType())){
 			List<RejectPath> rejectPathList = daoUtil.$queryList("PROCESS_INSTANCE_REJECT_PATH.sql", 
 					daoUtil.createMap("processInstanceId",task.getProcessInstanceId()),RejectPath.class);
 			task.setRejectPathList(rejectPathList);
 		}
-		return null;
+		return task;
+	}
+
+	@Override
+	public List<Task> taskList(@RequestBody ArrayList<Participant> participantList) {
+		
+		if(participantList == null || participantList.size() ==0){
+			return new ArrayList<Task>();
+		}
+		
+		//组装需要的FreeMarker参数
+		Map<String,Object> map = daoUtil.createMap().put("participantList", participantList);
+		for(int i=0; i<participantList.size(); i++){
+			Participant participant = participantList.get(i);
+			map.put("participantId_"+i, participant.getId());
+			map.put("participantType_"+i, participant.getType());
+		}
+		List<Task> taskList = daoUtil.$queryList("PROCESS_INSTANCE_TASK_LIST.sql", map,Task.class);
+		return taskList;
+	}
+
+	@Override
+	public boolean receive(@RequestBody TaskForm taskForm) {
+		
+		
+		//PROCESS_INSTANCE_TASK_BY_INSTANCE_RECORD_LOCK.sql
+		
+		return false;
 	}
 
 }

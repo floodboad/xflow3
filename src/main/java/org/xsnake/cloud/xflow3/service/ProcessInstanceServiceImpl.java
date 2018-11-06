@@ -15,15 +15,18 @@ import org.xsnake.cloud.common.search.Page;
 import org.xsnake.cloud.dao.DaoUtil;
 import org.xsnake.cloud.xflow3.api.HistoryRecord;
 import org.xsnake.cloud.xflow3.api.IProcessInstanceService;
+import org.xsnake.cloud.xflow3.api.ITaskService.CompleteTaskForm;
 import org.xsnake.cloud.xflow3.api.Participant;
 import org.xsnake.cloud.xflow3.api.ProcessInstance;
 import org.xsnake.cloud.xflow3.api.ProcessInstanceCondition;
 import org.xsnake.cloud.xflow3.api.Task;
-import org.xsnake.cloud.xflow3.api.ITaskService.CompleteTaskForm;
 import org.xsnake.cloud.xflow3.api.exception.XflowBusinessException;
 import org.xsnake.cloud.xflow3.core.ProcessDefinition;
 import org.xsnake.cloud.xflow3.core.context.ApplicationContext;
 import org.xsnake.cloud.xflow3.core.context.ProcessInstanceContext;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 @Service
 @RestController
@@ -70,7 +73,9 @@ public class ProcessInstanceServiceImpl implements IProcessInstanceService{
 			String processInstanceId = UUID.randomUUID().toString();
 			processInstance.setProcessInstanceId(processInstanceId);
 			//TODO 需要重构优化，可以让用户自定义主键生成策略，和标题生成策略，默认使用UUID，生成ID后要检查是否已经存在
-			processInstance.setName("临时名称,这里通过定义的规则替换");
+			
+			JSONObject businessFormJSON = JSON.parseObject(businessForm);
+			processInstance.setName(businessFormJSON.getString("processTitle"));
 			processInstance.setStatus(IProcessInstanceService.STATUS_RUNNING);
 			processInstance.setStartDate(new Date());
 			processInstance.setParentId(null);

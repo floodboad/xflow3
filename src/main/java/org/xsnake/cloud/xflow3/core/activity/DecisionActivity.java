@@ -6,8 +6,8 @@ import java.util.List;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-import org.apache.commons.lang.StringUtils;
 import org.dom4j.Element;
+import org.springframework.util.StringUtils;
 import org.xsnake.cloud.dao.DaoUtil;
 import org.xsnake.cloud.xflow3.api.exception.XflowDefinitionException;
 import org.xsnake.cloud.xflow3.core.AutomaticActivity;

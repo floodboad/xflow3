@@ -3,8 +3,8 @@ package org.xsnake.cloud.xflow3.core.register;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.xsnake.cloud.xflow3.api.exception.XflowDefinitionException;
 import org.xsnake.cloud.xflow3.core.DefinitionConstant;
 import org.xsnake.cloud.xflow3.core.ParticipantHandle;

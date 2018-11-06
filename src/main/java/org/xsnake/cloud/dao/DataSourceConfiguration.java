@@ -3,7 +3,6 @@ package org.xsnake.cloud.dao;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +14,6 @@ import com.alibaba.druid.pool.DruidDataSource;
  *
  */
 @Configuration
-@RefreshScope
 public class DataSourceConfiguration {
 
 	@Value(value = "${jdbc.url}")

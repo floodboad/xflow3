@@ -3,6 +3,7 @@ package org.xsnake.cloud.xflow3.api;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.xsnake.cloud.xflow3.api.ITaskService.RejectPath;
 
@@ -41,6 +42,16 @@ public class Task implements Serializable {
 	
 	List<RejectPath> rejectPathList;
 	
+	Map<String,String> activityAttributes;
+	
+	public Map<String, String> getActivityAttributes() {
+		return activityAttributes;
+	}
+
+	public void setActivityAttributes(Map<String, String> activityAttributes) {
+		this.activityAttributes = activityAttributes;
+	}
+
 	public String getTaskId() {
 		return taskId;
 	}

@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
@@ -17,7 +16,6 @@ import org.springframework.util.StringUtils;
  */
 
 @Configuration
-@RefreshScope
 public class TestConnection implements InitializingBean {
 
 	private static final Log logger = LogFactory.getLog(TestConnection.class);
