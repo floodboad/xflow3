@@ -10,6 +10,7 @@ import org.xsnake.cloud.xflow3.core.DefinitionConstant;
 import org.xsnake.cloud.xflow3.core.ParticipantHandle;
 import org.xsnake.cloud.xflow3.core.participant.AssignParticipant;
 import org.xsnake.cloud.xflow3.core.participant.CreatorParticipant;
+import org.xsnake.cloud.xflow3.core.participant.SQLParticipant;
 
 @Component  
 public class ParticipantHandleRegister {
@@ -29,6 +30,7 @@ public class ParticipantHandleRegister {
 	public ParticipantHandleRegister(){
 		participants.put(DefinitionConstant.PARTICIPANT_ASSIGN, AssignParticipant.class.getName());
 		participants.put(DefinitionConstant.PARTICIPANT_CREATOR, CreatorParticipant.class.getName());
+		participants.put(DefinitionConstant.PARTICIPANT_SQL, SQLParticipant.class.getName());
 	}
 
 	public Map<String, String> getParticipants() {

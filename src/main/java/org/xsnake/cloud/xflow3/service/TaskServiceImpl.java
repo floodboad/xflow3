@@ -2,6 +2,7 @@ package org.xsnake.cloud.xflow3.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -13,12 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.xsnake.cloud.common.search.Page;
 import org.xsnake.cloud.dao.DaoTemplate;
 import org.xsnake.cloud.dao.DaoUtil;
 import org.xsnake.cloud.xflow3.api.ITaskService;
 import org.xsnake.cloud.xflow3.api.Participant;
 import org.xsnake.cloud.xflow3.api.Task;
+import org.xsnake.cloud.xflow3.api.TaskCondition;
 import org.xsnake.cloud.xflow3.api.exception.XflowBusinessException;
 import org.xsnake.cloud.xflow3.core.Activity;
 import org.xsnake.cloud.xflow3.core.DefinitionConstant;
@@ -335,8 +339,8 @@ public class TaskServiceImpl implements ITaskService{
 	}
 
 	@Override
-	public Task get(String id) {
-		Task task = daoUtil.$queryObject("PROCESS_INSTANCE_TASK_LOCK.sql", daoUtil.createMap("TASK_ID", id),Task.class);
+	public Task get(@RequestParam(value="taskId") String taskId) {
+		Task task = daoUtil.$queryObject("PROCESS_INSTANCE_TASK_LOCK.sql", daoUtil.createMap("TASK_ID", taskId),Task.class);
 		if(task == null){
 			return null;
 		}
@@ -363,29 +367,28 @@ public class TaskServiceImpl implements ITaskService{
 	}
 
 	@Override
-	public List<Task> taskList(@RequestBody ArrayList<Participant> participantList) {
+	public Page<Task> taskList(@RequestBody TaskCondition taskCondition) {
+		List<Participant> participantList = taskCondition.getParticipantList();
 		
 		if(participantList == null || participantList.size() ==0){
-			return new ArrayList<Task>();
+			return new Page<>(new ArrayList<>(), 1, 20, 0);
 		}
 		
 		//组装需要的FreeMarker参数
-		Map<String,Object> map = daoUtil.createMap().put("participantList", participantList);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("participantList", participantList);
 		for(int i=0; i<participantList.size(); i++){
 			Participant participant = participantList.get(i);
 			map.put("participantId_"+i, participant.getId());
 			map.put("participantType_"+i, participant.getType());
 		}
-		List<Task> taskList = daoUtil.$queryList("PROCESS_INSTANCE_TASK_LIST.sql", map,Task.class);
+		Page<Task> taskList = daoUtil.$queryPage("PROCESS_INSTANCE_TASK_LIST.sql", map,taskCondition.getPage(),taskCondition.getRows(),Task.class);
 		return taskList;
 	}
 
 	@Override
 	public boolean receive(@RequestBody TaskForm taskForm) {
-		
-		
 		//PROCESS_INSTANCE_TASK_BY_INSTANCE_RECORD_LOCK.sql
-		
 		return false;
 	}
 

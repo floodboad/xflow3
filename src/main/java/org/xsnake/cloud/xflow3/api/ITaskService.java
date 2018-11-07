@@ -1,26 +1,26 @@
 package org.xsnake.cloud.xflow3.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.xsnake.cloud.common.search.Page;
 
 public interface ITaskService {
-	
-	
+
+	/*
+	 * 获取多个参与者的任务列表
+	 */
+	@RequestMapping(value = "/task/taskList", method = RequestMethod.POST)
+	Page<Task> taskList(@RequestBody TaskCondition taskCondition);
+
 	/*
 	 * 领取任务 
 	 */
 	@RequestMapping(value = "/task/receive", method = RequestMethod.POST)
 	boolean receive(@RequestBody TaskForm taskForm);
-	
-	/*
-	 * 获取多个参与者的任务列表 
-	 */
-	@RequestMapping(value = "/task/taskList", method = RequestMethod.POST)
-	List<Task> taskList(@RequestBody ArrayList<Participant> participantList);
 	
 	/*
 	 * 完成任务，如果整个流程结束返回true反之为false。区分虚拟任务与定义任务，如果是虚拟任务不会推动流程运行
@@ -33,8 +33,9 @@ public interface ITaskService {
 	/*
 	 * 获取指定任务
 	 */
+	
 	@RequestMapping(value = "/task/get", method = RequestMethod.GET)
-	Task get(String id);
+	Task get(@RequestParam(value="taskId") String taskId);
 	
 	
 	/*

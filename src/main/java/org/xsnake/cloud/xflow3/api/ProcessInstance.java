@@ -23,8 +23,25 @@ public class ProcessInstance implements Serializable {
 	private String parentActivityId;
 	private String businessForm;
 	private String forkStatus;
+	private String businessType;
+	private String businessUrl;
 	
-	
+	public String getBusinessUrl() {
+		return businessUrl;
+	}
+
+	public void setBusinessUrl(String businessUrl) {
+		this.businessUrl = businessUrl;
+	}
+
+	public String getBusinessType() {
+		return businessType;
+	}
+
+	public void setBusinessType(String businessType) {
+		this.businessType = businessType;
+	}
+
 	public String getForkStatus() {
 		return forkStatus;
 	}

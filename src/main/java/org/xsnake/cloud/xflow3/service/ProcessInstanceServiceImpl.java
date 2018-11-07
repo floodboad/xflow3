@@ -41,7 +41,8 @@ public class ProcessInstanceServiceImpl implements IProcessInstanceService{
 	public ProcessInstance start(@RequestBody ApplyForm applyForm) {
 		
 		String processCode = applyForm.getProcessCode(); 
-		String businessKey = applyForm.getBusinessKey(); 
+		String businessKey = applyForm.getBusinessKey();
+		String businessType = applyForm.getBusinessType();
 		String businessForm = applyForm.getBussinessForm();
 		Participant creator = applyForm.getCreator();
 		
@@ -73,13 +74,17 @@ public class ProcessInstanceServiceImpl implements IProcessInstanceService{
 			String processInstanceId = UUID.randomUUID().toString();
 			processInstance.setProcessInstanceId(processInstanceId);
 			//TODO 需要重构优化，可以让用户自定义主键生成策略，和标题生成策略，默认使用UUID，生成ID后要检查是否已经存在
-			
 			JSONObject businessFormJSON = JSON.parseObject(businessForm);
 			processInstance.setName(businessFormJSON.getString("processTitle"));
 			processInstance.setStatus(IProcessInstanceService.STATUS_RUNNING);
 			processInstance.setStartDate(new Date());
 			processInstance.setParentId(null);
 			processInstance.setBusinessForm(businessForm);
+			processInstance.setBusinessType(businessType);
+			
+			//TODO 从配置读取businessURL
+			String businessUrl = "/baseHeader/edit/" + businessFormJSON.getString("expCategoryId") + "?headerId="+ businessFormJSON.getString("headerId");
+			processInstance.setBusinessUrl(businessUrl);
 			
 			daoUtil.$update("PROCESS_INSTANCE_ADD.sql", processInstance);
 			ProcessInstanceContext context = new ProcessInstanceContext(applicationContext,processInstance);
@@ -87,7 +92,6 @@ public class ProcessInstanceServiceImpl implements IProcessInstanceService{
 			if(end){
 				processInstance.setStatus(IProcessInstanceService.STATUS_END);
 			}else{
-				
 				//流程开启后的第一个活动节点如果是任务节点并且参与者是操作人，则自动完成
 				DaoUtil daoUtil = context.getApplicationContext().getDaoUtil();
 				Task task = daoUtil.$queryObject("PROCESS_INSTANCE_TASK_BY_INSTANCE_OPERATOR.sql",daoUtil.createMap()

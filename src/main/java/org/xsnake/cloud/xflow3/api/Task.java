@@ -39,10 +39,28 @@ public class Task implements Serializable {
 	String creatorType;
 	String parentActivityId;
 	String taskType;
+	String businessType;
+	String businessUrl;
 	
 	List<RejectPath> rejectPathList;
 	
 	Map<String,String> activityAttributes;
+	
+	public String getBusinessUrl() {
+		return businessUrl;
+	}
+
+	public void setBusinessUrl(String businessUrl) {
+		this.businessUrl = businessUrl;
+	}
+
+	public String getBusinessType() {
+		return businessType;
+	}
+
+	public void setBusinessType(String businessType) {
+		this.businessType = businessType;
+	}
 	
 	public Map<String, String> getActivityAttributes() {
 		return activityAttributes;

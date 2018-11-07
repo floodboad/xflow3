@@ -11,6 +11,9 @@ import org.xsnake.cloud.xflow3.api.exception.XflowBusinessException;
 import org.xsnake.cloud.xflow3.core.ParticipantHandle;
 import org.xsnake.cloud.xflow3.core.context.ProcessInstanceContext;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 public class SQLParticipant extends ParticipantHandle implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +22,7 @@ public class SQLParticipant extends ParticipantHandle implements Serializable{
 	
 	public SQLParticipant(Element participantElement) {
 		super(participantElement);
-		sql = participantElement.elementText("participant");
+		sql = participantElement.getText();
 	}
 	
 	@Override
@@ -28,9 +31,10 @@ public class SQLParticipant extends ParticipantHandle implements Serializable{
 		String finalSql;
 		List<Participant> participantList;
 		try{
-			finalSql = daoUtil.processTemplate(sql, context.getProcessInstance());
-			participantList = daoUtil.queryList(finalSql, 
-				context.getProcessInstance(),Participant.class);
+			String businessForm = context.getProcessInstance().getBusinessForm();
+			JSONObject businessFormJSON = JSON.parseObject(businessForm);
+			finalSql = daoUtil.processTemplate(sql, businessFormJSON);
+			participantList = daoUtil.queryList(finalSql,businessFormJSON,Participant.class);
 		}catch (Exception e) {
 			daoUtil.$update("PROCESS_INSTANCE_ERROR.sql", daoUtil.createMap()
 					.put("PROCESS_INSTANCE_ID", context.getProcessInstance().getProcessInstanceId())

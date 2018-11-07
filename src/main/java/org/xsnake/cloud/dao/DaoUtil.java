@@ -137,6 +137,7 @@ public class DaoUtil {
 	}
 	
 	public <T> Page<T> $queryPage(String templateName,Object paramObj, int page ,int rows , Class<T> requiredType){
+		
 		return namedDaoTemplate.queryForPage(getSqlByTemplateName(templateName, paramObj),paramObj,page , rows,requiredType);
 	}
 

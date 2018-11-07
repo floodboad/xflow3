@@ -77,6 +77,8 @@ public interface IProcessInstanceService {
 		
 		String businessKey;
 		
+		String businessType;
+		
 		String bussinessForm;
 		
 		Participant creator;
@@ -87,6 +89,14 @@ public interface IProcessInstanceService {
 
 		public void setProcessCode(String processCode) {
 			this.processCode = processCode;
+		}
+		
+		public String getBusinessType() {
+			return businessType;
+		}
+
+		public void setBusinessType(String businessType) {
+			this.businessType = businessType;
 		}
 
 		public String getBusinessKey() {

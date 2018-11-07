@@ -71,6 +71,8 @@ public class DefinitionConstant {
 	public static final String PARTICIPANT_ASSIGN = "assign";
 	
 	public static final String PARTICIPANT_CREATOR = "creator";
+	
+	public static final String PARTICIPANT_SQL = "sql";
 
 	public static final String TYPE_ACTIVITY_ASYN_SUB = "asynSub";
 	

@@ -120,7 +120,7 @@ public class NamedDaoTemplate {
 	public Page<Map<String,Object>> queryForPage(String sql, Object param, int page ,int rows) {
 		try {
 			String thql = "select count(1) from (" + sql +") t ";
-			BigDecimal _count = namedParameterJdbcTemplate.queryForObject(thql, new BeanPropertySqlParameterSource(param), BigDecimal.class);
+			BigDecimal _count = queryForObject(thql, param, BigDecimal.class);
 			int count = _count.intValue();
 			List<Map<String,Object>> results = queryForList(getPageSQL(sql, (page - 1) * rows, rows ) ,param);
 			return new Page<Map<String,Object>>(results, page, rows, count);
@@ -132,7 +132,7 @@ public class NamedDaoTemplate {
 	public <T> Page<T> queryForPage(String sql, Object param, int page ,int rows,Class<T> clazz) {
 		try {
 			String thql = "select count(1) from (" + sql +") t ";
-			BigDecimal _count = namedParameterJdbcTemplate.queryForObject(thql, new BeanPropertySqlParameterSource(param), BigDecimal.class);
+			BigDecimal _count = queryForObject(thql, param, BigDecimal.class);
 			int count = _count.intValue();
 			List<T> results = queryForList(getPageSQL(sql, (page - 1) * rows, rows ) ,param,clazz);
 			return new Page<T>(results, page, rows, count);
