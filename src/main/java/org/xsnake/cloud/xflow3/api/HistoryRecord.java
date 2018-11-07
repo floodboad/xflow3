@@ -3,101 +3,29 @@ package org.xsnake.cloud.xflow3.api;
 import java.util.Date;
 
 public class HistoryRecord {
-	
-	private String id;
-	private String processInstanceId;
-	private String activityType;
-	private String activityName;
-	private String activityId;
-	private Date startTime;
-	private Date endTime;
-	private String status;
-	private String fromPath;
-	private Integer sn;
-	private String operatorId;
-	private String operatorName;
-	private String suggestion;
-	private String operateDate;
-	private String operateType;
 
-	public String getId() {
-		return id;
+	String recordId;
+	String operatorId;
+	String operatorName;
+	String operatorType;
+	String suggestion;
+	Date operateDate;
+	String operateType;
+	String participantId;
+	String participantName;
+	String participantType;
+	Date taskDate;
+	String taskType;
+	String historyTaskId;
+	String multiTaskResult;
+	String activityName;
+
+	public String getRecordId() {
+		return recordId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getProcessInstanceId() {
-		return processInstanceId;
-	}
-
-	public void setProcessInstanceId(String processInstanceId) {
-		this.processInstanceId = processInstanceId;
-	}
-
-	public String getActivityType() {
-		return activityType;
-	}
-
-	public void setActivityType(String activityType) {
-		this.activityType = activityType;
-	}
-
-	public String getActivityName() {
-		return activityName;
-	}
-
-	public void setActivityName(String activityName) {
-		this.activityName = activityName;
-	}
-
-	public String getActivityId() {
-		return activityId;
-	}
-
-	public void setActivityId(String activityId) {
-		this.activityId = activityId;
-	}
-
-	public Date getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getFromPath() {
-		return fromPath;
-	}
-
-	public void setFromPath(String fromPath) {
-		this.fromPath = fromPath;
-	}
-
-	public Integer getSn() {
-		return sn;
-	}
-
-	public void setSn(Integer sn) {
-		this.sn = sn;
+	public void setRecordId(String recordId) {
+		this.recordId = recordId;
 	}
 
 	public String getOperatorId() {
@@ -116,6 +44,14 @@ public class HistoryRecord {
 		this.operatorName = operatorName;
 	}
 
+	public String getOperatorType() {
+		return operatorType;
+	}
+
+	public void setOperatorType(String operatorType) {
+		this.operatorType = operatorType;
+	}
+
 	public String getSuggestion() {
 		return suggestion;
 	}
@@ -124,20 +60,84 @@ public class HistoryRecord {
 		this.suggestion = suggestion;
 	}
 
-	public String getOperateDate() {
-		return operateDate;
-	}
-
-	public void setOperateDate(String operateDate) {
-		this.operateDate = operateDate;
-	}
-
 	public String getOperateType() {
 		return operateType;
 	}
 
 	public void setOperateType(String operateType) {
 		this.operateType = operateType;
+	}
+
+	public String getParticipantId() {
+		return participantId;
+	}
+
+	public void setParticipantId(String participantId) {
+		this.participantId = participantId;
+	}
+
+	public String getParticipantName() {
+		return participantName;
+	}
+
+	public void setParticipantName(String participantName) {
+		this.participantName = participantName;
+	}
+
+	public String getParticipantType() {
+		return participantType;
+	}
+
+	public void setParticipantType(String participantType) {
+		this.participantType = participantType;
+	}
+
+	public String getTaskType() {
+		return taskType;
+	}
+
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
+	}
+
+	public String getHistoryTaskId() {
+		return historyTaskId;
+	}
+
+	public void setHistoryTaskId(String historyTaskId) {
+		this.historyTaskId = historyTaskId;
+	}
+
+	public String getMultiTaskResult() {
+		return multiTaskResult;
+	}
+
+	public void setMultiTaskResult(String multiTaskResult) {
+		this.multiTaskResult = multiTaskResult;
+	}
+
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
+
+	public Date getOperateDate() {
+		return operateDate;
+	}
+
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
+	}
+
+	public Date getTaskDate() {
+		return taskDate;
+	}
+
+	public void setTaskDate(Date taskDate) {
+		this.taskDate = taskDate;
 	}
 
 }

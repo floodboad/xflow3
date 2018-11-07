@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.dom4j.Element;
+import org.xsnake.cloud.dao.DaoUtil;
 import org.xsnake.cloud.xflow3.api.Participant;
 import org.xsnake.cloud.xflow3.core.context.ProcessInstanceContext;
 
@@ -65,12 +66,14 @@ public abstract class ParticipantHandle {
 		List<Participant> list = null;
 		try{
 			list = findParticipantList(context);
-		}catch (Exception e) {
-			//TODO 记录出错的参与者处理器，可以让管理员尽快解决错误。同时把这个任务转交到默认管理员处理
-		}
-		
-		if(list == null || list.isEmpty() ){
-			//如果没有任何参与者，这里可以读取配置使用一个默认管理员处理没有找到参与者的环节
+		}catch (Exception e) {}
+
+		if(list.isEmpty() ){
+			//如果没有任何参与者，这里可以读取配置使用一个默认管理员处理没有找到参与者的环节,然后将流程状态设置为
+			list.add(context.getApplicationContext().getEmptyParticipant());
+			DaoUtil daoUtil = context.getApplicationContext().getDaoUtil();
+			daoUtil.$update("PROCESS_INSTANCE_STATUS.sql",
+					daoUtil.createMap("PROCESS_INSTANCE_ID", context.getProcessInstance().getProcessInstanceId()).put("STATUS", "RUNNING_ERROR"));
 		}
 		return list;
 	}

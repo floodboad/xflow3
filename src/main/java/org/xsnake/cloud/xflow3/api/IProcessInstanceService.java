@@ -58,12 +58,7 @@ public interface IProcessInstanceService {
 	 * 查询符合条件的流程实例
 	 */
 	Page<ProcessInstance> query(ProcessInstanceCondition processInstanceCondition);
-
-	/*
-	 * 参与过的流程
-	 */
-	Page<ProcessInstance> queryJoin(ProcessInstanceCondition processInstanceCondition);
-
+	
 	/*
 	 * 列出流程实例的历史
 	 */

@@ -51,7 +51,7 @@ public class TaskServiceImpl implements ITaskService{
 		Assert.notNull(completeTaskForm);
 		//锁模式查询任务
 		Task task = daoUtil.$queryObject("PROCESS_INSTANCE_TASK_LOCK.sql", daoUtil.createMap("TASK_ID", completeTaskForm.getTaskId()),Task.class);
-		return complete(task, completeTaskForm.getOperator(), completeTaskForm.getComment() , null);
+		return complete(task, completeTaskForm.getOperator(), completeTaskForm.getComment() , null , completeTaskForm.getMultiTaskResult());
 	}
 
 	private void validate(CompleteTaskForm completeTaskForm) {
@@ -62,7 +62,7 @@ public class TaskServiceImpl implements ITaskService{
 		Assert.notNull(completeTaskForm.getOperator().getType(), "操作者Type不能为空");
 	}
 	
-	private boolean complete(Task task, Participant participant, String comment , String toTransitionId) {
+	private boolean complete(Task task, Participant participant, String comment , String toTransitionId,String multiTaskResult) {
 		if(task == null){
 			throw new XflowBusinessException("任务不存在或者已经被处理！");
 		}
@@ -150,7 +150,7 @@ public class TaskServiceImpl implements ITaskService{
 						.put("participantType", participant.getType())
 					,Task.class);
 			for(Task _task : taskList){
-				isEnd = complete(_task, participant, comment , null);
+				isEnd = complete(_task, participant, comment , null,"1");
 			}
 		}
 		return isEnd;
@@ -369,7 +369,6 @@ public class TaskServiceImpl implements ITaskService{
 	@Override
 	public Page<Task> taskList(@RequestBody TaskCondition taskCondition) {
 		List<Participant> participantList = taskCondition.getParticipantList();
-		
 		if(participantList == null || participantList.size() ==0){
 			return new Page<>(new ArrayList<>(), 1, 20, 0);
 		}

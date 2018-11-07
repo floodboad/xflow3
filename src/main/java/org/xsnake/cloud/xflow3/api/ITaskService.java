@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.xsnake.cloud.common.search.Page;
 
 public interface ITaskService {
-
 	/*
 	 * 获取多个参与者的任务列表
 	 */
@@ -238,6 +237,16 @@ public interface ITaskService {
 	public static class CompleteTaskForm extends TaskForm{
 		
 		String comment;
+
+		String multiTaskResult ;
+		
+		public String getMultiTaskResult() {
+			return multiTaskResult;
+		}
+
+		public void setMultiTaskResult(String multiTaskResult) {
+			this.multiTaskResult = multiTaskResult;
+		}
 
 		public String getComment() {
 			return comment;

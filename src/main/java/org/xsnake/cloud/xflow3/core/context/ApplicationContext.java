@@ -4,12 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.xsnake.cloud.dao.DaoUtil;
 import org.xsnake.cloud.xflow3.api.ITaskService;
+import org.xsnake.cloud.xflow3.api.Participant;
 import org.xsnake.cloud.xflow3.common.ProcessInstanceNextNumberService;
 import org.xsnake.cloud.xflow3.core.register.ActivityRegister;
 import org.xsnake.cloud.xflow3.core.register.ParticipantHandleRegister;
 
 @Component
 public class ApplicationContext extends Context{
+	
+	@Autowired
+	Participant emptyParticipant;
 	
 	@Autowired
 	private ActivityRegister activityRegister;
@@ -44,6 +48,10 @@ public class ApplicationContext extends Context{
 
 	public ITaskService getTaskService() {
 		return taskService;
+	}
+
+	public Participant getEmptyParticipant() {
+		return emptyParticipant;
 	}
 	
 }

@@ -1,7 +1,5 @@
 package org.xsnake.cloud.xflow3.api;
 
-import java.util.Date;
-
 import org.xsnake.cloud.common.search.BaseCondition;
 /**
  * 
@@ -11,47 +9,31 @@ import org.xsnake.cloud.common.search.BaseCondition;
 public class ProcessInstanceCondition extends BaseCondition{
 
 	private static final long serialVersionUID = 1L;
-
-	String id;
-	
-	String definitionCode;
-	
-	int definitionVersion;
-	
-	String status;
-	
-	String parentId;
-	
-	Date startTime;
 	
 	String creatorId;
 	
-	Date endTime;
+	String creatorType;
 	
-	String participantId;
+	String operatorId;
+	
+	String operatorType;
+	
+	String status;
 
-	public String getId() {
-		return id;
+	public String getOperatorId() {
+		return operatorId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setOperatorId(String operatorId) {
+		this.operatorId = operatorId;
 	}
 
-	public String getDefinitionCode() {
-		return definitionCode;
+	public String getOperatorType() {
+		return operatorType;
 	}
 
-	public void setDefinitionCode(String definitionCode) {
-		this.definitionCode = definitionCode;
-	}
-
-	public int getDefinitionVersion() {
-		return definitionVersion;
-	}
-
-	public void setDefinitionVersion(int definitionVersion) {
-		this.definitionVersion = definitionVersion;
+	public void setOperatorType(String operatorType) {
+		this.operatorType = operatorType;
 	}
 
 	public String getStatus() {
@@ -62,22 +44,6 @@ public class ProcessInstanceCondition extends BaseCondition{
 		this.status = status;
 	}
 
-	public String getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
-
-	public Date getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
 	public String getCreatorId() {
 		return creatorId;
 	}
@@ -86,12 +52,12 @@ public class ProcessInstanceCondition extends BaseCondition{
 		this.creatorId = creatorId;
 	}
 
-	public Date getEndTime() {
-		return endTime;
+	public String getCreatorType() {
+		return creatorType;
 	}
 
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
+	public void setCreatorType(String creatorType) {
+		this.creatorType = creatorType;
 	}
 	
 }

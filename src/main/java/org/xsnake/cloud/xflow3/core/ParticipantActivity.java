@@ -120,6 +120,7 @@ public abstract class ParticipantActivity extends Activity{
 				.put("PARTICIPANT_TYPE", task.getParticipantType())
 				.put("TASK_DATE", task.getTaskDate())
 				.put("TASK_TYPE", task.getTaskType())
+				.put("MULTI_TASK_RESULT", context.getMultiTaskResult())
 		);
 		List<Transition> resultList = doTask(context);
 		return resultList;

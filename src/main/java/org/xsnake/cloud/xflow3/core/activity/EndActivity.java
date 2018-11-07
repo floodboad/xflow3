@@ -32,8 +32,8 @@ public final class EndActivity extends AutomaticActivity {
 	public List<Transition> doWork(ProcessInstanceContext context){
 		DaoUtil daoUtil = context.getApplicationContext().getDaoUtil();
 		
-		daoUtil.$update("PROCESS_INSTANCE_END.sql",
-				daoUtil.createMap("PROCESS_INSTANCE_ID", context.getProcessInstance().getProcessInstanceId()));
+		daoUtil.$update("PROCESS_INSTANCE_STATUS.sql",
+				daoUtil.createMap("PROCESS_INSTANCE_ID", context.getProcessInstance().getProcessInstanceId()).put("STATUS", "END"));
 		
 		//添加流程结束后回调事件标示
 		daoUtil.$update("PROCESS_INSTANCE_CALLBACK_ADD.sql",daoUtil.createMap()

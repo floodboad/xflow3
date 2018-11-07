@@ -146,14 +146,7 @@ public class ProcessInstanceServiceImpl implements IProcessInstanceService{
 
 	@Override
 	public Page<ProcessInstance> query(ProcessInstanceCondition processInstanceCondition) {
-//		return processInstanceRepository.query(processInstanceCondition);
-		return null;
-	}
-
-	@Override
-	public Page<ProcessInstance> queryJoin(ProcessInstanceCondition processInstanceCondition) {
-//		return processInstanceRepository.queryJoin(processInstanceCondition);
-		return null;
+		return daoUtil.$queryPage("PROCESS_INSTANCE_HISTORY_SEARCH.sql", processInstanceCondition, processInstanceCondition.getPage(), processInstanceCondition.getRows(),ProcessInstance.class);
 	}
 
 	@Override

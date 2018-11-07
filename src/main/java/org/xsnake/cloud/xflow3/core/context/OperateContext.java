@@ -15,6 +15,8 @@ public class OperateContext extends TaskContext{
 	
 	OperateType operateType;
 	
+	String multiTaskResult;
+	
 	String toTransitionId; 
 	
 	public static enum OperateType {
@@ -31,6 +33,11 @@ public class OperateContext extends TaskContext{
 		public String toString() {
 			return type;
 		}
+	}
+	
+	public OperateContext(ApplicationContext applicationContext,Task task,OperateType operateType,Participant operator,String suggestion,String multiTaskResult) {
+		this(applicationContext, task, operateType, operator, suggestion);
+		this.multiTaskResult = multiTaskResult;
 	}
 	
 	public OperateContext(ApplicationContext applicationContext,Task task,OperateType operateType,Participant operator,String suggestion) {
@@ -58,6 +65,10 @@ public class OperateContext extends TaskContext{
 
 	public OperateType getOperateType() {
 		return operateType;
+	}
+
+	public String getMultiTaskResult() {
+		return multiTaskResult;
 	}
 	
 }
